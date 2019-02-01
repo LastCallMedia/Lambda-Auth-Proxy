@@ -1,5 +1,5 @@
 
-const {Github} = require('../src/authorizers');
+const {Github} = require('../src/oauth2/authorizers');
 
 describe('Github', function() {
 

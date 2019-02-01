@@ -1,6 +1,6 @@
 {
-  "name": "cc-login",
-  "version": "1.0.0",
+  "name": "lambda-auth-proxy",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -12,5 +12,13 @@
     "cookie": "^0.3.1",
     "jsonwebtoken": "^8.4.0",
     "oauth": "^0.9.15"
+  },
+  "devDependencies": {
+    "jest": "^23.6.0"
+  },
+  "jest": {
+    "testMatch": [
+      "**/test/*.js"
+    ]
   }
 }

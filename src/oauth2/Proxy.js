@@ -2,6 +2,7 @@
 const {URLSearchParams} = require('url');
 const jwt = require('jsonwebtoken');
 const cookie = require('cookie');
+const Github = require('./authorizers').Github;
 
 class Proxy {
     constructor(authorizer, opts = {}) {
@@ -26,7 +27,7 @@ class Proxy {
      */
     handleRequest(request) {
         const currentUser = this.getCurrentUser(request);
-        if(request.uri == this.pathLogin) {
+        if(request.uri === this.pathLogin) {
             return this.handleLogin(request, currentUser);
         }
         if(request.uri === this.pathCallback) {
@@ -229,11 +230,5 @@ class Proxy {
 }
 
 module.exports = Proxy;
-
-function parseCookies(headers) {
-    const cookieArr = headers.cookie || []
-
-    return cookieArr.reduce((parsed, cookieObj) => {
-        return Object.assign({}, parsed, cookie.parse(cookieObj.value))
-    }, {})
-}
+module.exports.authorizers = {};
+module.exports.authorizers.Github = Github;

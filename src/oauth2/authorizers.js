@@ -13,6 +13,8 @@ class Github {
         this.client = new OAuth(clientId, clientSecret, baseSite, authorizePath, accessTokenPath);
         this.client.useAuthorizationHeaderforGET(true)
 
+        // @see https://github.com/nodejs/node/issues/13338
+        this.client.getPromised = promisify(this.client.get);
         this.scopes = ['user:email']
         this.requiredDomains = [];
         this.requiredOrgs = [];
@@ -37,13 +39,13 @@ class Github {
         }
     }
     async getUsername(bearerToken) {
-        const account = await promisify(this.client.get)(`${this.baseAPI}/user`, bearerToken);
+        const account = await this.client.getPromised(`${this.baseAPI}/user`, bearerToken)
         return account.login
     }
-    async getEmail(bearerToken, username) {
-        const emails = await promisify(this.client.get)(`${this.baseAPI}/user/emails`, bearerToken);
-        var matching;
 
+    async getEmail(bearerToken, username) {
+        const emails = JSON.parse(await this.client.getPromised(`${this.baseAPI}/user/emails`, bearerToken))
+        let matching;
         if(this.requiredDomains.length) {
             matching = emails.filter(email => {
                 const parts = email.email.split('@');
@@ -59,22 +61,25 @@ class Github {
 
         return matching[0].email
     }
+
     requireEmailDomain(domain) {
         this.requiredDomains.push(domain)
     }
+
     requireOrganizationMembership(organization) {
         if(!this.scopes.includes('read:org')) {
             this.scopes.push('read:org');
         }
         this.requiredOrgs.push(organization)
     }
+
     async assertMemberOfRequiredOrgs(bearerToken, username) {
         if(this.requiredOrgs.length) {
             let page = 1;
             let response;
             do {
                 const params = {page, limit: 200};
-                response = await promisify(this.client.get)(`${this.baseAPI}/user/orgs?${qs.stringify(params)}`, bearerToken)
+                response = JSON.parse(await this.client.getPromised(`${this.baseAPI}/user/orgs?${qs.stringify(params)}`, bearerToken))
                 const matching = response.filter(o => this.requiredOrgs.includes(o.login))
                 if(matching.length) {
                     return true
@@ -87,9 +92,7 @@ class Github {
         }
         return Promise.resolve(true)
     }
+
 }
-
-
-
 
 module.exports.Github  = Github
