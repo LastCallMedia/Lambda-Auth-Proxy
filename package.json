@@ -1,7 +1,7 @@
 {
-  "name": "lambda-auth-proxy",
+  "name": "@lastcall/lambda-auth-proxy",
   "version": "0.0.1",
-  "description": "",
+  "description": "Different types of proxies that can easily be used with AWS Lambda and CloudFront distribution behaviors to require auth for any content behind the distribution",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -20,5 +20,13 @@
     "testMatch": [
       "**/test/*.js"
     ]
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LastCallMedia/Lambda-Auth-Proxy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LastCallMedia/Lambda-Auth-Proxy/issues"
+  },
+  "homepage": "https://github.com/LastCallMedia/Lambda-Auth-Proxy#readme"
 }
