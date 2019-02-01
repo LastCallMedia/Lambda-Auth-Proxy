@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+
+<body>
+<div id="main-container" style="width:100%; padding:20px;">
+    <h3>Private Access to {{sitename}}</h3>
+    <hr>
+    <p>Provides private access to {{siteurl}}</p>
+    <hr>
+    <div class="alerts">
+        {{messages}}
+    </div>
+    <form id="authform" method="post">
+        Username: <input type="text" name="username" id="username"><br><br> Password: <input type="password" name="password" id="password"><br><br>
+        <input type="submit" value="Submit-Authenticate User" class="btn btn-primary">
+    </form>
+</div>
+
+
+</body>
+</html>
