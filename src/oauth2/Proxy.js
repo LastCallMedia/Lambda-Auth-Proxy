@@ -232,3 +232,11 @@ class Proxy {
 module.exports = Proxy;
 module.exports.authorizers = {};
 module.exports.authorizers.Github = Github;
+
+function parseCookies(headers) {
+    const cookieArr = headers.cookie || []
+
+    return cookieArr.reduce((parsed, cookieObj) => {
+        return Object.assign({}, parsed, cookie.parse(cookieObj.value))
+    }, {})
+}
