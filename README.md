@@ -13,10 +13,10 @@ The Lambda handler extracts the request, runs it through the desired proxy and e
 A basic template for the lambda handler looks something like this:
 
 ```javascript
-//const Proxy = require('lambda-auth-proxy').Local;
+//const Proxy = require('@lastcall/lambda-auth-proxy').Local;
 //const Authorizer = Proxy.authorizer;
 
-const Proxy = require('lambda-auth-proxy').OAuth2;
+const Proxy = require('@lastcall/lambda-auth-proxy').OAuth2;
 const Authorizer = Proxy.authorizers.Github;
 
 let proxy;
@@ -85,7 +85,7 @@ The `Local` proxy uses cookie-based authentication. An HTML form is used to `POS
 #### Example Local Auth Lambda Handler:
 
 ```javascript
-const Proxy = require('lambda-auth-proxy').Local;
+const Proxy = require('@lastcall/lambda-auth-proxy').Local;
 const Authorizer = Proxy.authorizer;
 
 let proxy;
@@ -178,7 +178,7 @@ authorizer.requireOrganizationMembership('LastCallMedia');
 
 ```javascript
 
-const Proxy = require('lambda-auth-proxy').OAuth2;
+const Proxy = require('@lastcall/lambda-auth-proxy').OAuth2;
 const Authorizer = Proxy.authorizers.Github;
 
 let proxy;
