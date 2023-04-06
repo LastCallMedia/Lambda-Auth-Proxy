@@ -1,7 +1,7 @@
 {
-  "name": "@lastcall/lambda-auth-proxy",
+  "name": "@MightyAcornDigital/lambda-edge-proxy",
   "version": "0.0.1",
-  "description": "Different types of proxies that can easily be used with AWS Lambda and CloudFront distribution behaviors to require auth for any content behind the distribution",
+  "description": "Provides auth capabilities for lambda@edge viewer-request functions",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -24,10 +24,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LastCallMedia/Lambda-Auth-Proxy.git"
+    "url": "git+https://github.com/MightyAcornDigital/lambda-edge-proxy.git"
   },
   "bugs": {
-    "url": "https://github.com/LastCallMedia/Lambda-Auth-Proxy/issues"
+    "url": "https://github.com/MightyAcornDigital/lambda-edge-proxy/issues"
   },
-  "homepage": "https://github.com/LastCallMedia/Lambda-Auth-Proxy#readme"
+  "homepage": "https://github.com/MightyAcornDigital/lambda-edge-proxy#readme",
+  "volta": {
+    "node": "18.15.0",
+    "npm": "9.6.4"
+  }
 }
