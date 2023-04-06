@@ -1,0 +1,24 @@
+name: PR
+
+on:
+  pull_request:
+
+# Set the default shell to use bash with -eo pipefail.
+# This doesn't happen by default, which can create some confusing and
+# dangerous errors... See https://github.com/actions/runner/issues/353
+defaults:
+  run:
+    shell: bash --noprofile --norc -eo pipefail {0}
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: npm
+      - name: Unit Tests
+        run: npx jest --ci --maxWorkers=3 --reporters=default --reporters=github-actions

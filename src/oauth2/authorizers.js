@@ -14,10 +14,13 @@ class Github {
         this.client.useAuthorizationHeaderforGET(true)
 
         // @see https://github.com/nodejs/node/issues/13338
-        this.client.getPromised = promisify(this.client.get);
         this.scopes = ['user:email']
         this.requiredDomains = [];
         this.requiredOrgs = [];
+    }
+
+    getPromised(url, token) {
+        return promisify(this.client.get.bind(this.client))(url, token);
     }
 
     getAuthorizeUrl(params) {
@@ -39,12 +42,12 @@ class Github {
         }
     }
     async getUsername(bearerToken) {
-        const account = await this.client.getPromised(`${this.baseAPI}/user`, bearerToken)
+        const account = await this.getPromised(`${this.baseAPI}/user`, bearerToken);
         return account.login
     }
 
     async getEmail(bearerToken, username) {
-        const emails = JSON.parse(await this.client.getPromised(`${this.baseAPI}/user/emails`, bearerToken))
+        const emails = JSON.parse(await this.getPromised(`${this.baseAPI}/user/emails`, bearerToken))
         let matching;
         if(this.requiredDomains.length) {
             matching = emails.filter(email => {
@@ -79,7 +82,7 @@ class Github {
             let response;
             do {
                 const params = {page, limit: 200};
-                response = JSON.parse(await this.client.getPromised(`${this.baseAPI}/user/orgs?${qs.stringify(params)}`, bearerToken))
+                response = JSON.parse(await this.getPromised(`${this.baseAPI}/user/orgs?${qs.stringify(params)}`, bearerToken))
                 const matching = response.filter(o => this.requiredOrgs.includes(o.login))
                 if(matching.length) {
                     return true
