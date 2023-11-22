@@ -16,7 +16,7 @@ describe('Github', function() {
                     })
                     return;
                 case 'https://api.github.com/user/emails':
-                    callback(null, [
+                    callback(null, JSON.stringify([
                         {
                             primary: false,
                             email: 'me@nonprimary.com'
@@ -25,20 +25,20 @@ describe('Github', function() {
                             primary: true,
                             email: 'me@primary.com'
                         }
-                    ])
+                    ]));
                     return;
                 case 'https://api.github.com/user/orgs?page=1&limit=200':
-                    callback(null, [
+                    callback(null, JSON.stringify([
                         {login: 'org1'},
-                    ]);
+                    ]));
                     return;
                 case 'https://api.github.com/user/orgs?page=2&limit=200':
-                    callback(null, [
+                    callback(null, JSON.stringify([
                         {login: 'org2'},
-                    ]);
+                    ]));
                     return;
                 case 'https://api.github.com/user/orgs?page=3&limit=200':
-                    callback(null, []);
+                    callback(null, JSON.stringify([]));
                     return;
 
                 default:
