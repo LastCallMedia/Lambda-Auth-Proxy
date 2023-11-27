@@ -1,5 +1,5 @@
 
-const {Proxy} = require('../');
+const Proxy = require('../src/oauth2/Proxy');
 const querystring = require('querystring');
 const jwt = require('jsonwebtoken');
 const cookie = require('cookie');
