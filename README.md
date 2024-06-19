@@ -1,6 +1,6 @@
 # Lambda Authentication Proxy
 
-This nodejs library provides a simple authentication proxy. There are different configurable authentication providers included.
+Lambda Authentication Proxy is brought to you by your friends at [Last Call Media](https://www.lastcallmedia.com), this nodejs library provides a simple authentication proxy. There are different configurable authentication providers included.
 
 ## Basic Setup
 
